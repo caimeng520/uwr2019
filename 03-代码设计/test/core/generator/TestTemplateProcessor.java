@@ -51,6 +51,7 @@ public class TestTemplateProcessor implements DataSourceType{
 		PowerMock.verifyAll();
 	}
 
+	
 	@Before
 	public void setUp() throws Exception {
 
