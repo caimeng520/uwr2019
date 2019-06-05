@@ -83,8 +83,8 @@ public class TestTemplateProcessor implements DataSourceType{
 		Holders.add(h3);
 		
 		EasyMock.expect(constDataSource.getDataHolder("sex")).andReturn(h1);
-        EasyMock.expect(constDataSource.getDataHolder("readme")).andReturn(h2);
-        EasyMock.expect(constDataSource.getDataHolder("testexpr")).andReturn(h3);
+        	EasyMock.expect(constDataSource.getDataHolder("readme")).andReturn(h2);
+        	EasyMock.expect(constDataSource.getDataHolder("testexpr")).andReturn(h3);
         
 		EasyMock.replay(cds,h1,h2,h3);
 		
