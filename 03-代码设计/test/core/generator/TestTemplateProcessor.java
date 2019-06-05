@@ -64,10 +64,32 @@ public class TestTemplateProcessor implements DataSourceType{
 		//4. 录制该静态Mock的行为模式（针对的是静态方法）；
         //------------------------------------------------
         //以上流程请在这里实现：
-        //
-        //
-        // 这里写代码
-        //
+		cds = EasyMock.createMock(ConstDataSource.class);
+		dsc = EasyMock.createMock(DataSourceConfig.class);
+		ArrayList<DataHolder> Holders = new ArrayList<>();
+		
+		DataHolder h1 = EasyMock.createMock(DataHolder.class);
+		DataHolder h2 = EasyMock.createMock(DataHolder.class);
+		DataHolder h3 = EasyMock.createMock(DataHolder.class);
+		
+		EasyMock.expect(h1.getValue()).andReturn("Female");
+		EasyMock.expect(h2.getValue()).andReturn("5");
+		EasyMock.expect(h3.getValue()).andReturn("5.0");
+		EasyMock.expect(h3.getExpr()).andReturn("${num}+${readme}");
+		EasyMock.expect(h3.fillValue()).andReturn(null);
+		
+		Holders.add(h1);
+		Holders.add(h2);
+		Holders.add(h3);
+		
+		EasyMock.expect(constDataSource.getDataHolder("sex")).andReturn(h1);
+        EasyMock.expect(constDataSource.getDataHolder("readme")).andReturn(h2);
+        EasyMock.expect(constDataSource.getDataHolder("testexpr")).andReturn(h3);
+        
+		EasyMock.replay(cds,h1,h2,h3);
+		
+		PowerMock.mockStatic(DataSourceConfig.class);
+		EasyMock.expect(DataSourceConfig.newInstance()).andReturn(dsc);
         //------------------------------------------------
 		//5. 重放所有的行为。
 		PowerMock.replayAll(dsc);
